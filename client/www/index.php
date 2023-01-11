@@ -2,10 +2,10 @@
 
 require_once("php/config.php");
 
-/*if (!isset($_SESSION["id"])) {
+if (!isset($_SESSION["id"])) {
     header("location: login.php");
     exit;
-}*/
+}
 ?>
 <html>
 
