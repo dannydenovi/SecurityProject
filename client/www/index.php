@@ -2,10 +2,16 @@
 
 require_once("php/config.php");
 
-if (!isset($_SESSION["id"])) {
+/*if (!isset($_SESSION["id"])) {
     header("location: login.php");
     exit;
-}
+}*/
+
+
+echo shell_exec(escapeshellcmd("whoami"));
+echo shell_exec(escapeshellcmd("sudo python3 /var/www/html/scripts/test_temp.py"));
+echo shell_exec("ls");
+
 ?>
 <html>
 

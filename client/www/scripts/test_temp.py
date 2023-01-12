@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from RPi.GPIO import setmode, setwarnings, setup, output, BCM, HIGH, LOW, OUT
 from time import sleep
 from smbus2 import SMBus
