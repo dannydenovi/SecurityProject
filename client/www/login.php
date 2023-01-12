@@ -1,6 +1,11 @@
 <?php
 
-    require_once("php/config.php");
+require_once("php/config.php");
+
+if(isset($_SESSION['id'])){
+    header("Location: index.php");
+    exit();
+}
 
 ?>
 <html lang="it">
@@ -18,32 +23,29 @@
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
     <!-- Custom styles for this template -->
-    <link href="dist/style.css" rel="stylesheet">
+    <script src="./dist/js/login.js"></script>
+    <link href="dist/css/style.css" rel="stylesheet">
+
 </head>
 
 <body class="text-center login-body">
 
     <main class="form-signin w-100 m-auto">
-        <form>
             <img class="mb-4" src="favicon.ico" alt="" width="72" height="72">
             <h1 class="h3 mb-3 fw-normal">Login</h1>
 
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <input type="email" class="form-control" id="email" placeholder="name@example.com">
                 <label for="floatingInput">Email</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <input type="password" class="form-control" id="password" placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Accedi</button>
+            <button id="loginButton" class="w-100 btn btn-lg btn-primary" type="button">Accedi</button>
             <p class="mt-5 mb-3 text-muted">Anchesi - De Novi &copy; 2023</p>
-        </form>
     </main>
 
-
-
 </body>
-
 </html>
