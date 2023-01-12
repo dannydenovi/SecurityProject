@@ -8,6 +8,7 @@ var logout = $("#logout");
 $(document).ready(function() {
     //navbar.load("dist/html/navbar.html");
     main.load("dist/html/users.html");
+    getUser();
     logout.click(function () {
         $.ajax({
             url: "../php/loginManager.php", 
@@ -49,6 +50,19 @@ function selectedItemMenu(activeElement) {
     activeElement.removeClass("link-dark");
 }
 
+function getUser(){
+    $.ajax({
+        url: "../php/user.php",
+        type: "GET",
+        data: {
+            id: 1
+        },
+        success: function (response) {
+            var user = JSON.parse(response);
+            $("#namePlace").text(user.name + " " + user.surname);
+        }
+    });
+}
 
 
 

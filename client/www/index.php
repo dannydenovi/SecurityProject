@@ -12,7 +12,7 @@ if (!isset($_SESSION["id"])) {
 echo shell_exec("ls");*/
 
 ?>
-<html>
+<html lang="it">
 
 <head>
     <title>Face Recognition</title>

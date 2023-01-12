@@ -9,9 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST['email']) && isset($_P
 
         $row = $result->fetch_array(MYSQLI_ASSOC);
         if (password_verify($password, $row['password']) && $row["id"] == 1) {
-
             $_SESSION['id'] = $row['id'];
-
             echo json_encode(['success' => true]);
         } else
             echo json_encode(['error' => 'Email o password errati']);
