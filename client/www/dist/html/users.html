@@ -1,3 +1,4 @@
+<script src="dist/js/users.js"></script>
 <div class="row">
     <div class="col-12">
         <!--BEGIN TITLE-->
@@ -5,7 +6,7 @@
         <!--END TITLE-->
         <div class="row">
             <div>
-                <button type="button" class="btn btn-primary" id="addTaxModalButton">
+                <button type="button" class="btn btn-primary" id="add-user-btn" data-bs-toggle="modal" data-bs-target="#add-user-modal">
                     <i class="bi bi-plus"></i>Aggiungi Utente
                 </button>
             </div>
@@ -31,3 +32,36 @@
         <br>
     </div>
 </div>
+
+<div class="modal fade" id="add-user-modal" tabindex="-1" aria-labelledby="addUserModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Aggiungi Utente</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="name" placeholder="Nome" name="name" required>
+              </div>
+              <div class="mb-3">
+                <label for="formGroupExampleInput2" class="form-label">Cognome</label>
+                <input type="text" class="form-control" id="surname" placeholder="Cognome" name="surname" required>
+              </div>
+              <div class="mb-3">
+                <label for="formGroupExampleInput2" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Email" required>
+              </div>
+              <div class="mb-3">
+                <label for="formFile" class="form-label">Immagine del volto</label>
+                <input class="form-control" type="file" id="file" required>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+          <button type="button" class="btn btn-primary" id="add-user">Salva</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -16,6 +16,16 @@ $(document).ready(function() {
         });
     });
     
+
+    const myModal = document.getElementById('add-user-modal')
+    const myInput = document.getElementById('add-user-btn')
+
+    myModal.addEventListener('shown.bs.modal', () => {
+        myInput.focus()
+    })
+
+
+
 });
 
 //Al click su uno degli elementi presenti nella topbar
@@ -67,3 +77,4 @@ function getUser(){
 
 
 
+ 

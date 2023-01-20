@@ -13,6 +13,9 @@ switch ($method) {
     case "GET":
         getUser($_GET["id"]);
         break;
+    case "POST":
+        addUser();
+        break;
     case "PUT":
         editUser();
         break;
@@ -30,6 +33,45 @@ function getUser($id) {
         echo json_encode($info);
     } else {
         echo json_encode(['error' => 'Errore nel recupero dei dati']);
+    }
+}
+
+function addUser() {
+
+    global $connection;
+
+    $name = $connection->real_escape_string($_POST["name"]);
+    $surname = $connection->real_escape_string($_POST["surname"]);
+    $email = $connection->real_escape_string($_POST["email"]);
+
+    $error = [];
+    if(!$name)
+        $error["name"] = "Nome non inserito";
+    if(!$surname)
+        $error["surname"] = "Cognome non inserito";
+    if(!$email || !filter_var($email, FILTER_VALIDATE_EMAIL))
+        $error["email"] = "Email non inserita o non valida";
+    if(!$_FILES["file"]["name"])
+        $error["file"] = "Immagine non inserita";
+
+    if(!$error){
+        $sql = "INSERT INTO users (name, surname, email) VALUES ('" . $name . "', '" . $surname . "', '" . $email . "')";
+        if($connection -> query($sql)){
+            $last_id = $connection->insert_id;
+
+            $path = "/var/www/html/scripts/faces/" . $last_id;
+
+            if(move_uploaded_file($_FILES["file"]["tmp_name"], $path)){
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['error' => 'Errore nel salvataggio dell\'immagine']);
+            }
+        } else {
+            echo json_encode(['error' => 'Errore nel salvataggio dei dati']);
+        }
+
+    } else {
+        echo json_encode($error);
     }
 }
 
