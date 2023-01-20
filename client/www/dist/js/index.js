@@ -1,6 +1,6 @@
 
 //Array di pagine
-var elements = [$("#users"), $("#logs"), $("#settings")];
+var elements = [$("#users"), $("#settings")];
 var main = $("#main");
 var navbar = $("#navbar");
 var logout = $("#logout");
@@ -8,7 +8,8 @@ var logout = $("#logout");
 $(document).ready(function() {
     //navbar.load("dist/html/navbar.html");
     main.load("dist/html/users.html");
-    getUser();
+    getAdmin();
+    getUsers();
     logout.click(function () {
         $.ajax({
             url: "../php/loginManager.php", 
@@ -36,12 +37,6 @@ $("#users").click(function () {
     $("#main").load("dist/html/users.html");
 });
 
-$("#logs").click(function () {
-    $("#main").empty();
-    selectedItemMenu($("#logs"));
-    $("#main").load("dist/html/logs.html");
-});
-
 $("#settings").click(function () {
     $("#main").empty();
     selectedItemMenu($("#settings"));
@@ -60,21 +55,48 @@ function selectedItemMenu(activeElement) {
     activeElement.removeClass("link-dark");
 }
 
-function getUser(){
+function getAdmin(id){
     $.ajax({
         url: "../php/user.php",
         type: "GET",
         data: {
-            id: 1
+            id: id
         },
         success: function (response) {
-            var user = JSON.parse(response);
+            var user = JSON.parse(response)[0];
             $("#namePlace").text(user.name + " " + user.surname);
         }
     });
 }
 
 
+function getUsers(){
+    var table = $("#usersTable")
 
+    $.ajax({
+        url: "../php/user.php",
+        type: "GET",
+        success: function (response) {
+            var users = JSON.parse(response);
+            console.log(users);
+            var html = ""
+            for (var i = 0; i < users.length; i++) {
+                console.log(users[i]);
+                var user = users[i];
+
+                html += "<tr id=" + user.id + ">";
+                html += "<td>" + user.name + "</td>";
+                html += "<td>" + user.surname + "</td>";
+                html += "<td>" + user.email + "</td>";
+                html += "<td>";
+                html += "<button type='button' class='btn btn-warning m-2' onclick='getUser(" + user.id + ")'><i class='bi bi-pen' ></i></button>";
+                html += "<button type='button' class='btn btn-danger m-2' onclick='deleteUser(" + user.id + ")'><i class='bi bi-trash'></i></button></td>";
+                html += "</tr>";
+            }
+            table.empty();
+            table.append(html);
+        }
+    });
+}
 
  

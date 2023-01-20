@@ -29,6 +29,11 @@ echo shell_exec("ls");*/
 
     <!-- Custom styles for this template -->
     <link href="dist/css/style.css" rel="stylesheet">
+
+    <!-- CDN Bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
+    
+
 </head>
 
 <body class="m-4">
@@ -44,7 +49,6 @@ echo shell_exec("ls");*/
                     <li>
                         <span class="nav-link px-2 link-secondary" id="users">Utenti</span>
                     </li>
-                    <li><span class="nav-link px-2 link-dark" id="logs">Logs</span></li>
                     <li>
                         <span class="nav-link px-2 link-dark" id="settings">Impostazioni</span>
                     </li>

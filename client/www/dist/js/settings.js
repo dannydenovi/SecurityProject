@@ -13,6 +13,7 @@ $(document).ready(function () {
             url: "../../php/user.php",
             type: "PUT",
             data: {
+                id: 1,
                 name: name,
                 surname: surname,
                 email: email,
@@ -43,6 +44,7 @@ function getUserInfos() {
         },
         success: function (response) {
             var user = JSON.parse(response);
+            var user = user[0];
             $("#name").val(user.name);
             $("#surname").val(user.surname);
             $("#email").val(user.email);
