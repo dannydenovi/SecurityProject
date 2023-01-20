@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Creato il: Gen 12, 2023 alle 01:56
+-- Creato il: Gen 19, 2023 alle 17:29
 -- Versione del server: 8.0.31
 -- Versione PHP: 8.0.27
 
@@ -44,7 +44,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `img_path`, `is_enabled`) VALUES
-(1, 'admin', 'admin', 'admin@admin.com', 'admin', NULL, 1);
+(1, 'Danny', 'Claudio', 'admin@admin.com', '$2y$10$lIPwG5QKXHlMvf64DkBvOu4yuGe4YPp/ZDAekKp4tESBUXEAkX8yO', NULL, 1);
 
 --
 -- Indici per le tabelle scaricate
