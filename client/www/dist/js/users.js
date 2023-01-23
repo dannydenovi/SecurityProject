@@ -13,7 +13,6 @@ $("#edit-user").click(function () {
 
 
 function addUser(){
-    console.log("click");
     var fd = new FormData();
     var files = $('#file')[0].files[0];
     fd.append('file',files);
@@ -34,7 +33,7 @@ function addUser(){
             var json = JSON.parse(response);
             if (json.success){
                 getUsers();
-                $("#edit-user-modal").modal("hide");
+                $("#add-user-modal").modal("hide");
             } else {
                 alert("Errore! Controlla i campi.");
             }

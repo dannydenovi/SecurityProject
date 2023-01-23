@@ -3,7 +3,10 @@ import os, sys
 import cv2
 import numpy as np
 import math
-
+from smbus2 import SMBus
+from mlx90614 import MLX90614
+from RPi import GPIO
+from time import sleep
 
 # Helper
 def face_confidence(face_distance, face_match_threshold=0.6):
@@ -26,6 +29,7 @@ class FaceRecognition:
     process_current_frame = True
     precedent_listdir = []
     i = 0
+    temp = 0
 
     def __init__(self):
         self.encode_faces()
@@ -47,6 +51,15 @@ class FaceRecognition:
 
         if not video_capture.isOpened():
             sys.exit('Video source not found...')
+        
+        led = 23
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(led, GPIO.OUT)
+        bus = SMBus(1)
+        sleep(2)
+        sensor = MLX90614(bus, address=0x5A)
+        sleep(2)
+
 
         while True:
             ret, frame = video_capture.read()
@@ -78,11 +91,15 @@ class FaceRecognition:
                     best_match_index = np.argmin(face_distances)
                     if matches[best_match_index]:
                         name = self.known_face_names[best_match_index]
-                        confidence = face_confidence(face_distances[best_match_index])
+                        confidence = float(face_confidence(face_distances[best_match_index])[:-1])
+                        if confidence > 95: 
+                            GPIO.output(led, GPIO.HIGH)
+                            sleep(0.3)
+                            GPIO.output(led, GPIO.LOW)
 
-                    self.face_names.append(f'{name} ({confidence})')
+                    self.face_names.append(f'{name} ({confidence}%)')
 
-            if self.i == 20: 
+            if self.i == 10: 
                 if os.listdir('faces') != self.precedent_listdir:
                     self.encode_faces()
                 self.i = 0
